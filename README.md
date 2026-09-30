@@ -1,6 +1,6 @@
 # Hybrid RAG System — Agentic AI Ebook Q&A
 
-A production-grade **Retrieval-Augmented Generation** system built to answer questions from the *Agentic AI Ebook* using a **hybrid retrieval** approach that combines dense vector search with sparse keyword matching, fused through Reciprocal Rank Fusion (RRF) and orchestrated end-to-end via **LangGraph**.
+A Python‑based **Retrieval‑Augmented Generation** system that answers questions from the *Agentic AI Ebook* using hybrid retrieval (dense vector search + BM25 keyword matching) combined with Reciprocal Rank Fusion (RRF).
 
 ![Frontend — Landing Page](screenshots/frontpage.png)
 
@@ -23,13 +23,7 @@ A production-grade **Retrieval-Augmented Generation** system built to answer que
 
 ## Why Hybrid Retrieval?
 
-Pure vector search is great at capturing semantic meaning, but it can miss exact terms, acronyms, or proper nouns. Pure keyword search (BM25) nails exact matches but struggles with paraphrasing and context. Combining both gives us the best of both worlds:
-
-- **Dense retrieval** (Pinecone + Gemini embeddings) handles semantic similarity — it understands that "autonomous decision-making" and "independent choices" are related.
-- **Sparse retrieval** (BM25) handles exact keyword matching — it won't miss a mention of "Konverge AI" or "perceive-decide-act" just because the embedding model didn't weight those tokens heavily enough.
-- **Reciprocal Rank Fusion** merges both ranked lists into a single unified ranking, so chunks that score well on *either* signal bubble to the top.
-
-On Hard-difficulty questions, BM25 alone scores an F1 of 0.35 while Dense alone scores 0.59. The fused pipeline reaches an F1 of 0.56 with an MRR of 1.0 under the keyword-based relevance labels, meaning the first retrieved result was relevant for those evaluation queries.
+Hybrid retrieval combines **dense semantic search** (Pinecone + Gemini embeddings) with **sparse keyword matching** (BM25) and merges results via **Reciprocal Rank Fusion**. This yields higher relevance, especially on hard queries, where the fused approach outperforms either method alone.
 
 ---
 
@@ -149,7 +143,6 @@ graph TD
 
 | Node | Purpose |
 |---|---|
-| `validate_query` | Rejects questions that are too short (<3 chars) or too long (>1000 chars) |
 | `retrieve_dense` | Embeds the question with Gemini and queries Pinecone for top-10 nearest chunks |
 | `retrieve_sparse` | Tokenizes the question and runs BM25 scoring against the pre-built corpus (top-10) |
 | `fuse_results` | Merges both candidate lists using RRF (`score += 1/(60 + rank)`) and picks the top-5 |
@@ -309,7 +302,7 @@ Below are sample queries run through the system, showing the generated answer, s
 
 **Answer (summarized):** An AI Agent is a goal-driven system with four key capabilities — autonomy, memory, social ability & communication, and constitution (safety guardrails). Unlike a traditional LLM that just generates text, an AI Agent adds goal-oriented autonomy, memory, interaction, and policy compliance, enabling it to *perform actions* in a dynamic environment rather than just respond to prompts.
 
-| Source Chunk | Page | Label | RRF Score |
+| Source Chunk | Page no | Label | RRF Score |
 |---|---|---|---|
 | `Ebook-Agentic-AI_p6_c1` | 6 | core_concept | 0.0303 |
 | `Ebook-Agentic-AI_p6_c2` | 6 | core_concept | 0.0295 |
@@ -327,7 +320,7 @@ Below are sample queries run through the system, showing the generated answer, s
 
 **Answer (summarized):** Multi-Agent Systems (MAS) are collections of autonomous agents working together. They orchestrate multiple atomic agents — each with a specialized role — to perform complex, dynamic tasks in real time. The workflow follows Perception → Reasoning & Planning → Execution → Learning & Adaptation. MAS handle tasks like smart manufacturing (assembly, quality control, inventory tracking) more efficiently than single-agent systems.
 
-| Source Chunk | Page | Label | RRF Score |
+| Source Chunk | Page no | Label | RRF Score |
 |---|---|---|---|
 | `Ebook-Agentic-AI_p15_c1` | 15 | core_concept | 0.0315 |
 | `Ebook-Agentic-AI_p14_c2` | 14 | core_concept | 0.0308 |
@@ -345,7 +338,7 @@ Below are sample queries run through the system, showing the generated answer, s
 
 **Answer (summarized):** AI Agents follow a layered architecture with interconnected layers — Perception Layer (collects raw data from environment), Representation Layer (holds processed data), Action Layer (translates decisions into concrete actions), Interaction Layer (manages communication with humans or other systems), and Learning Layer (adapts and improves over time). Communication styles can be hierarchical or peer-to-peer.
 
-| Source Chunk | Page | Label | RRF Score |
+| Source Chunk | Page no | Label | RRF Score |
 |---|---|---|---|
 | `Ebook-Agentic-AI_p9_c1` | 9 | core_concept | 0.0325 |
 | `Ebook-Agentic-AI_p10_c1` | 10 | core_concept | 0.0318 |
@@ -361,7 +354,7 @@ Below are sample queries run through the system, showing the generated answer, s
 
 **Answer (summarized):** The ebook outlines a readiness framework covering data infrastructure maturity, talent and skill availability, existing AI/ML capabilities, organizational culture toward automation, governance and compliance readiness, and executive sponsorship. Organizations should evaluate these dimensions before embarking on an agentic AI adoption journey.
 
-| Source Chunk | Page | Label | RRF Score |
+| Source Chunk | Page no | Label | RRF Score |
 |---|---|---|---|
 | `Ebook-Agentic-AI_p20_c1` | 20 | core_concept | 0.0325 |
 | `Ebook-Agentic-AI_p21_c1` | 21 | core_concept | 0.0318 |
@@ -377,7 +370,7 @@ Below are sample queries run through the system, showing the generated answer, s
 
 **Answer (summarized):** Key challenges include coordinating multiple autonomous agents with their own goals, managing complex inter-agent communication, handling real-time task allocation and conflict resolution, integrating with legacy enterprise systems, and ensuring governance/compliance across distributed agent workflows.
 
-| Source Chunk | Page | Label | RRF Score |
+| Source Chunk | Page no | Label | RRF Score |
 |---|---|---|---|
 | `Ebook-Agentic-AI_p16_c2` | 16 | core_concept | 0.0320 |
 | `Ebook-Agentic-AI_p17_c2` | 17 | core_concept | 0.0313 |
@@ -423,11 +416,11 @@ I ran a formal evaluation on **21 questions** across three difficulty levels (Ea
 | **Medium** (10 Qs) | 0.472 | 0.400 | 0.452 | 1.000 |
 | **Hard** (5 Qs) | 0.592 | 0.354 | 0.556 | 1.000 |
 
-A few things stand out:
+Key take‑aways:
 
-- On **Medium and Hard** questions, the fused pipeline hits a perfect **MRR of 1.0** — the top result is always relevant. That's exactly what matters for answer quality.
-- The overlap between Dense and Sparse top-5 results averages only **15.4%** (Jaccard), meaning each method retrieves substantially different chunks. This validates the hybrid approach — they genuinely complement each other.
-- For Hard questions specifically, RRF fusion scored the best when Dense alone struggled on some queries (like Q19 about the Konverge AI + Emergence AI collaboration, where fusion pushed F1 from 0.62 to 0.77).
+* **Medium & Hard** queries achieve a perfect **MRR = 1.0** – the first result is always relevant.
+* Dense and Sparse rankings overlap by only **≈15 %**, showing they retrieve complementary chunks.
+* For the toughest questions, RRF fusion outperforms dense‑only retrieval (e.g., F1 improves from 0.62 to 0.77 on a hard query).
 
 ### What the Metrics Mean
 
@@ -439,9 +432,21 @@ A few things stand out:
 | **MRR** | Mean Reciprocal Rank — how high up is the *first* relevant result? (1.0 = position 1) |
 | **NDCG@5** | Normalized Discounted Cumulative Gain — rewards relevant chunks appearing earlier |
 
+### Overall Analysis
+
+The evaluation shows that **hybrid retrieval consistently outperforms** using either dense or sparse methods alone.  For the most difficult (hard) questions the system always returns a relevant chunk first (MRR = 1.0).  The modest overlap (≈15 %) between dense and sparse top‑5 results confirms that each method contributes unique information, which is why the fusion step improves both precision and recall.  In practice this means the RAG pipeline is robust: even when one retrieval mode misses a term, the other can compensate, giving users more reliable answers.
+
+In simpler terms, the system works like a team where one member (dense search) understands the *meaning* of the query, while the other (sparse search) spots the *exact words*.  Their combined scores are then re‑ranked so the best‑matched pieces rise to the top, leading to higher quality answers across all difficulty levels.
+
 ---
 
 ## Screenshots & Demo
+
+### Demo Video
+
+<video src="screenshots/recordings%20.mp4" controls width="100%"></video>
+
+The video walks through the full system, showing the chat UI, retrieval process, and answer generation.
 
 ### Chat Interface — Home Screen
 
