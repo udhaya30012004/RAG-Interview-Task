@@ -1,0 +1,35 @@
+.header {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-main);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.header-subtitle {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 18px;
+  }
+}

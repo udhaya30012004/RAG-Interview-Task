@@ -1,0 +1,35 @@
+# PDF extraction
+pymupdf4llm
+
+# Chunking
+langchain
+langchain-community
+langchain-text-splitters
+
+# Embeddings (Gemini)
+langchain-google-genai
+google-generativeai
+
+
+
+# Sparse retrieval
+rank-bm25
+
+langchain-groq
+
+# LangGraph
+langgraph
+
+# API
+fastapi
+uvicorn
+
+# Config & validation
+pydantic
+pydantic-settings
+python-dotenv
+
+# Testing
+pytest
+httpx
+pinecone

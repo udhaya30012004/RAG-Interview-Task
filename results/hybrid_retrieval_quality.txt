@@ -1,0 +1,313 @@
+================================================================================
+  HYBRID RETRIEVAL QUALITY EVALUATION REPORT
+================================================================================
+
+Date         : 2026-09-30 18:21:45
+Test cases   : 21 questions
+
+RETRIEVAL METHODS
+  Dense      : Pinecone vector search + Gemini gemini-embedding-001 (top-10)
+  Sparse     : BM25 keyword search (top-10)
+  Fusion     : Reciprocal Rank Fusion (RRF k=60, final top-5)
+
+================================================================================
+  AGGREGATE METRICS (ALL QUESTIONS)
+================================================================================
+
+DENSE RETRIEVAL (21 questions)
+  Precision@5  : 0.7619
+  Recall@5     : 0.4763
+  F1@5         : 0.5369
+  MRR          : 0.9762
+  NDCG@5       : 0.8378
+
+SPARSE RETRIEVAL (BM25)
+  Precision@5  : 0.5619
+  Recall@5     : 0.3296
+  F1@5         : 0.3775
+  MRR          : 0.7831
+  NDCG@5       : 0.6211
+
+FUSED RETRIEVAL (RRF)
+  Precision@5  : 0.6952
+  Recall@5     : 0.4120
+  F1@5         : 0.4776
+  MRR          : 0.9381
+  NDCG@5       : 0.7629
+
+ANALYSIS
+  Avg overlap@5 (Dense vs Sparse) : 0.1544
+  Avg F1 lift from fusion          : -0.0866
+
+================================================================================
+  BREAKDOWN BY DIFFICULTY
+================================================================================
+
+EASY (6 questions)
+  Dense F1@5   : 0.5996
+  Sparse F1@5  : 0.3587
+  Fused F1@5   : 0.4557
+  F1 lift      : -0.1810
+
+MEDIUM (10 questions)
+  Dense F1@5   : 0.4717
+  Sparse F1@5  : 0.4004
+  Fused F1@5   : 0.4517
+  F1 lift      : -0.0551
+
+HARD (5 questions)
+  Dense F1@5   : 0.5921
+  Sparse F1@5  : 0.3543
+  Fused F1@5   : 0.5557
+  F1 lift      : -0.0364
+
+================================================================================
+  PER-QUESTION RESULTS
+================================================================================
+
+Q1 (EASY)
+  Question     : What is agentic AI?
+  Relevant     : 17 chunks (keyword-based)
+
+  Dense        : P@5=1.0000 R@5=0.2941 F1@5=0.4545 MRR=1.0000 NDCG@5=1.0000
+  Sparse       : P@5=1.0000 R@5=0.2941 F1@5=0.4545 MRR=1.0000 NDCG@5=1.0000
+  Fused        : P@5=1.0000 R@5=0.2941 F1@5=0.4545 MRR=1.0000 NDCG@5=1.0000
+  Overlap@5    : 0.0000
+  F1 lift      : +0.0000
+  Top RRF score: 0.0308
+
+Q2 (EASY)
+  Question     : Who are the authors and contributors of this ebook?
+  Relevant     : 5 chunks (keyword-based)
+
+  Dense        : P@5=0.8000 R@5=0.8000 F1@5=0.8000 MRR=0.5000 NDCG@5=0.6608
+  Sparse       : P@5=0.2000 R@5=0.2000 F1@5=0.2000 MRR=0.5000 NDCG@5=0.2140
+  Fused        : P@5=0.4000 R@5=0.4000 F1@5=0.4000 MRR=0.5000 NDCG@5=0.3452
+  Overlap@5    : 0.2500
+  F1 lift      : -0.4000
+  Top RRF score: 0.0328
+
+Q3 (EASY)
+  Question     : What is the main focus of Chapter 1?
+  Relevant     : 2 chunks (keyword-based)
+
+  Dense        : P@5=0.4000 R@5=1.0000 F1@5=0.5714 MRR=1.0000 NDCG@5=0.8503
+  Sparse       : P@5=0.2000 R@5=0.5000 F1@5=0.2857 MRR=1.0000 NDCG@5=0.6131
+  Fused        : P@5=0.2000 R@5=0.5000 F1@5=0.2857 MRR=1.0000 NDCG@5=0.6131
+  Overlap@5    : 0.1111
+  F1 lift      : -0.2857
+  Top RRF score: 0.0328
+
+Q4 (EASY)
+  Question     : What does the preface say about AI transition?
+  Relevant     : 4 chunks (keyword-based)
+
+  Dense        : P@5=0.4000 R@5=0.5000 F1@5=0.4444 MRR=1.0000 NDCG@5=0.6367
+  Sparse       : P@5=0.6000 R@5=0.7500 F1@5=0.6667 MRR=0.3333 NDCG@5=0.5143
+  Fused        : P@5=0.6000 R@5=0.7500 F1@5=0.6667 MRR=1.0000 NDCG@5=0.7366
+  Overlap@5    : 0.2500
+  F1 lift      : +0.0000
+  Top RRF score: 0.0323
+
+Q5 (EASY)
+  Question     : How many chapters does the ebook contain?
+  Relevant     : 5 chunks (keyword-based)
+
+  Dense        : P@5=0.6000 R@5=0.6000 F1@5=0.6000 MRR=1.0000 NDCG@5=0.7227
+  Sparse       : P@5=0.0000 R@5=0.0000 F1@5=0.0000 MRR=0.1111 NDCG@5=0.0000
+  Fused        : P@5=0.2000 R@5=0.2000 F1@5=0.2000 MRR=0.2000 NDCG@5=0.1312
+  Overlap@5    : 0.1111
+  F1 lift      : -0.4000
+  Top RRF score: 0.0318
+
+Q6 (EASY)
+  Question     : What is Konverge AI's area of expertise?
+  Relevant     : 6 chunks (keyword-based)
+
+  Dense        : P@5=0.8000 R@5=0.6667 F1@5=0.7273 MRR=1.0000 NDCG@5=0.8688
+  Sparse       : P@5=0.6000 R@5=0.5000 F1@5=0.5455 MRR=1.0000 NDCG@5=0.6844
+  Fused        : P@5=0.8000 R@5=0.6667 F1@5=0.7273 MRR=1.0000 NDCG@5=0.8688
+  Overlap@5    : 0.4286
+  F1 lift      : +0.0000
+  Top RRF score: 0.0325
+
+Q7 (MEDIUM)
+  Question     : What is the anatomy of an agentic AI system?
+  Relevant     : 16 chunks (keyword-based)
+
+  Dense        : P@5=1.0000 R@5=0.3125 F1@5=0.4762 MRR=1.0000 NDCG@5=1.0000
+  Sparse       : P@5=0.6000 R@5=0.1875 F1@5=0.2857 MRR=0.5000 NDCG@5=0.5148
+  Fused        : P@5=0.8000 R@5=0.2500 F1@5=0.3810 MRR=1.0000 NDCG@5=0.7860
+  Overlap@5    : 0.1111
+  F1 lift      : -0.0952
+  Top RRF score: 0.0325
+
+Q8 (MEDIUM)
+  Question     : How do multi-agent systems work together?
+  Relevant     : 14 chunks (keyword-based)
+
+  Dense        : P@5=0.8000 R@5=0.2857 F1@5=0.4211 MRR=1.0000 NDCG@5=0.7860
+  Sparse       : P@5=0.6000 R@5=0.2143 F1@5=0.3158 MRR=1.0000 NDCG@5=0.7227
+  Fused        : P@5=0.8000 R@5=0.2857 F1@5=0.4211 MRR=1.0000 NDCG@5=0.8688
+  Overlap@5    : 0.0000
+  F1 lift      : +0.0000
+  Top RRF score: 0.0310
+
+Q9 (MEDIUM)
+  Question     : What are the key orchestration challenges for agentic AI?
+  Relevant     : 12 chunks (keyword-based)
+
+  Dense        : P@5=1.0000 R@5=0.4167 F1@5=0.5882 MRR=1.0000 NDCG@5=1.0000
+  Sparse       : P@5=0.6000 R@5=0.2500 F1@5=0.3529 MRR=1.0000 NDCG@5=0.7227
+  Fused        : P@5=1.0000 R@5=0.4167 F1@5=0.5882 MRR=1.0000 NDCG@5=1.0000
+  Overlap@5    : 0.1111
+  F1 lift      : +0.0000
+  Top RRF score: 0.0320
+
+Q10 (MEDIUM)
+  Question     : How can organizations assess their readiness for agentic AI adoption?
+  Relevant     : 10 chunks (keyword-based)
+
+  Dense        : P@5=1.0000 R@5=0.5000 F1@5=0.6667 MRR=1.0000 NDCG@5=1.0000
+  Sparse       : P@5=1.0000 R@5=0.5000 F1@5=0.6667 MRR=1.0000 NDCG@5=1.0000
+  Fused        : P@5=1.0000 R@5=0.5000 F1@5=0.6667 MRR=1.0000 NDCG@5=1.0000
+  Overlap@5    : 0.4286
+  F1 lift      : +0.0000
+  Top RRF score: 0.0325
+
+Q11 (MEDIUM)
+  Question     : What real-world applications are transforming industries with agentic AI?
+  Relevant     : 4 chunks (keyword-based)
+
+  Dense        : P@5=0.4000 R@5=0.5000 F1@5=0.4444 MRR=1.0000 NDCG@5=0.5414
+  Sparse       : P@5=0.4000 R@5=0.5000 F1@5=0.4444 MRR=1.0000 NDCG@5=0.5856
+  Fused        : P@5=0.4000 R@5=0.5000 F1@5=0.4444 MRR=1.0000 NDCG@5=0.5856
+  Overlap@5    : 0.2500
+  F1 lift      : +0.0000
+  Top RRF score: 0.0328
+
+Q12 (MEDIUM)
+  Question     : What is autonomous multi-agent orchestration for enterprises?
+  Relevant     : 15 chunks (keyword-based)
+
+  Dense        : P@5=0.8000 R@5=0.2667 F1@5=0.4000 MRR=1.0000 NDCG@5=0.8539
+  Sparse       : P@5=1.0000 R@5=0.3333 F1@5=0.5000 MRR=1.0000 NDCG@5=1.0000
+  Fused        : P@5=1.0000 R@5=0.3333 F1@5=0.5000 MRR=1.0000 NDCG@5=1.0000
+  Overlap@5    : 0.1111
+  F1 lift      : +0.0000
+  Top RRF score: 0.0323
+
+Q13 (MEDIUM)
+  Question     : What balance does the ebook strike between technical depth and accessibility?
+  Relevant     : 3 chunks (keyword-based)
+
+  Dense        : P@5=0.2000 R@5=0.3333 F1@5=0.2500 MRR=1.0000 NDCG@5=0.4693
+  Sparse       : P@5=0.4000 R@5=0.6667 F1@5=0.5000 MRR=1.0000 NDCG@5=0.7654
+  Fused        : P@5=0.2000 R@5=0.3333 F1@5=0.2500 MRR=1.0000 NDCG@5=0.4693
+  Overlap@5    : 0.4286
+  F1 lift      : -0.2500
+  Top RRF score: 0.0328
+
+Q14 (MEDIUM)
+  Question     : How does the ebook help shape the future of intelligent automation?
+  Relevant     : 4 chunks (keyword-based)
+
+  Dense        : P@5=0.4000 R@5=0.5000 F1@5=0.4444 MRR=1.0000 NDCG@5=0.6367
+  Sparse       : P@5=0.2000 R@5=0.2500 F1@5=0.2222 MRR=1.0000 NDCG@5=0.3904
+  Fused        : P@5=0.4000 R@5=0.5000 F1@5=0.4444 MRR=1.0000 NDCG@5=0.6367
+  Overlap@5    : 0.1111
+  F1 lift      : +0.0000
+  Top RRF score: 0.0328
+
+Q15 (MEDIUM)
+  Question     : What challenges do outdated systems and complex processes present?
+  Relevant     : 15 chunks (keyword-based)
+
+  Dense        : P@5=1.0000 R@5=0.3333 F1@5=0.5000 MRR=1.0000 NDCG@5=1.0000
+  Sparse       : P@5=0.8000 R@5=0.2667 F1@5=0.4000 MRR=1.0000 NDCG@5=0.7860
+  Fused        : P@5=0.8000 R@5=0.2667 F1@5=0.4000 MRR=1.0000 NDCG@5=0.8688
+  Overlap@5    : 0.0000
+  F1 lift      : -0.1000
+  Top RRF score: 0.0301
+
+Q16 (MEDIUM)
+  Question     : What is the difference between perception and action in agentic systems?
+  Relevant     : 14 chunks (keyword-based)
+
+  Dense        : P@5=1.0000 R@5=0.3571 F1@5=0.5263 MRR=1.0000 NDCG@5=1.0000
+  Sparse       : P@5=0.6000 R@5=0.2143 F1@5=0.3158 MRR=0.5000 NDCG@5=0.5296
+  Fused        : P@5=0.8000 R@5=0.2857 F1@5=0.4211 MRR=1.0000 NDCG@5=0.8539
+  Overlap@5    : 0.0000
+  F1 lift      : -0.1053
+  Top RRF score: 0.0306
+
+Q17 (HARD)
+  Question     : How do agentic AI systems achieve autonomous decision-making across perceive-decide-act cycles?
+  Relevant     : 16 chunks (keyword-based)
+
+  Dense        : P@5=1.0000 R@5=0.3125 F1@5=0.4762 MRR=1.0000 NDCG@5=1.0000
+  Sparse       : P@5=1.0000 R@5=0.3125 F1@5=0.4762 MRR=1.0000 NDCG@5=1.0000
+  Fused        : P@5=1.0000 R@5=0.3125 F1@5=0.4762 MRR=1.0000 NDCG@5=1.0000
+  Overlap@5    : 0.1111
+  F1 lift      : +0.0000
+  Top RRF score: 0.0320
+
+Q18 (HARD)
+  Question     : What are the strategic implications of adopting agentic AI for enterprise operations?
+  Relevant     : 6 chunks (keyword-based)
+
+  Dense        : P@5=0.8000 R@5=0.6667 F1@5=0.7273 MRR=1.0000 NDCG@5=0.8304
+  Sparse       : P@5=0.0000 R@5=0.0000 F1@5=0.0000 MRR=0.1667 NDCG@5=0.0000
+  Fused        : P@5=0.6000 R@5=0.5000 F1@5=0.5455 MRR=1.0000 NDCG@5=0.6164
+  Overlap@5    : 0.0000
+  F1 lift      : -0.1818
+  Top RRF score: 0.0315
+
+Q19 (HARD)
+  Question     : How does the collaboration between Konverge AI and Emergence AI enhance this guide's value?
+  Relevant     : 8 chunks (keyword-based)
+
+  Dense        : P@5=0.8000 R@5=0.5000 F1@5=0.6154 MRR=1.0000 NDCG@5=0.8688
+  Sparse       : P@5=0.8000 R@5=0.5000 F1@5=0.6154 MRR=1.0000 NDCG@5=0.8304
+  Fused        : P@5=1.0000 R@5=0.6250 F1@5=0.7692 MRR=1.0000 NDCG@5=1.0000
+  Overlap@5    : 0.4286
+  F1 lift      : +0.1538
+  Top RRF score: 0.0328
+
+Q20 (HARD)
+  Question     : What frameworks enable organizations to excel in implementing agentic AI?
+  Relevant     : 8 chunks (keyword-based)
+
+  Dense        : P@5=0.8000 R@5=0.5000 F1@5=0.6154 MRR=1.0000 NDCG@5=0.8688
+  Sparse       : P@5=0.2000 R@5=0.1250 F1@5=0.1538 MRR=0.3333 NDCG@5=0.1696
+  Fused        : P@5=0.6000 R@5=0.3750 F1@5=0.4615 MRR=1.0000 NDCG@5=0.6399
+  Overlap@5    : 0.0000
+  F1 lift      : -0.1538
+  Top RRF score: 0.0311
+
+Q21 (HARD)
+  Question     : How do agentic AI systems address efficiency and precision in operations and innovations?
+  Relevant     : 14 chunks (keyword-based)
+
+  Dense        : P@5=1.0000 R@5=0.3571 F1@5=0.5263 MRR=1.0000 NDCG@5=1.0000
+  Sparse       : P@5=1.0000 R@5=0.3571 F1@5=0.5263 MRR=1.0000 NDCG@5=1.0000
+  Fused        : P@5=1.0000 R@5=0.3571 F1@5=0.5263 MRR=1.0000 NDCG@5=1.0000
+  Overlap@5    : 0.0000
+  F1 lift      : +0.0000
+  Top RRF score: 0.0311
+
+================================================================================
+  METRIC DEFINITIONS
+================================================================================
+
+Precision@5  : What fraction of top-5 retrieved chunks are relevant?
+Recall@5     : What fraction of all relevant chunks are in top-5?
+F1@5         : Harmonic mean of Precision@5 and Recall@5
+MRR          : Mean Reciprocal Rank — 1/(rank of first relevant chunk)
+NDCG@5       : Normalized Discounted Cumulative Gain — rewards relevant chunks at top
+Overlap@5    : Jaccard similarity between dense and sparse top-5 results
+F1 lift      : Improvement in F1@5 from fusion over best individual method
+
+Relevance labeling: keyword-based (15%+ keyword overlap = relevant)
+Higher is better for all metrics (range: 0.0 to 1.0)
+

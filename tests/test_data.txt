@@ -1,0 +1,31 @@
+# Retrieval Quality Test Questions
+# Format: difficulty|question|relevant_keywords (comma-separated)
+# Lines starting with # are comments
+# Based on: Ebook-Agentic-AI.pdf
+
+# EASY (6 questions) — Direct factual questions from the ebook
+easy|What is agentic AI?|agentic,autonomous,agent,definition,AI system,independently,decision,goal,perceive,act,intelligent
+easy|Who are the authors and contributors of this ebook?|Konverge AI,Emergence AI,author,contributor,decision science,autonomous,orchestration,collaboration
+easy|What is the main focus of Chapter 1?|introduction,agentic AI,chapter,fundamental,concept,overview,executive guide
+easy|What does the preface say about AI transition?|preface,transition,standalone,interconnected,autonomous,decision-making,framework,pivotal
+easy|How many chapters does the ebook contain?|chapter,six,table of contents,structure,guide,focused
+easy|What is Konverge AI's area of expertise?|Konverge,decision science,data,machine learning,AI products,solutions,business
+
+# MEDIUM (9 questions) — Requires synthesis and understanding
+medium|What is the anatomy of an agentic AI system?|anatomy,architecture,component,structure,system,perception,reasoning,action,memory,agent
+medium|How do multi-agent systems work together?|multi-agent,system,collaboration,coordination,communication,together,orchestration,autonomous
+medium|What are the key orchestration challenges for agentic AI?|orchestration,challenge,coordination,complexity,autonomous,system,integration,management
+medium|How can organizations assess their readiness for agentic AI adoption?|readiness,assessment,organization,adoption,framework,capability,preparation,enterprise,maturity
+medium|What real-world applications are transforming industries with agentic AI?|application,real-world,industry,transformation,practical,business,use case,operations
+medium|What is autonomous multi-agent orchestration for enterprises?|autonomous,orchestration,multi-agent,enterprise,Emergence AI,coordination,system,workflow
+medium|What balance does the ebook strike between technical depth and accessibility?|technical,depth,accessibility,balance,practical,guide,executive,understanding
+medium|How does the ebook help shape the future of intelligent automation?|intelligent,automation,future,confidence,innovation,inspire,understanding,AI landscape
+medium|What challenges do outdated systems and complex processes present?|challenge,outdated,system,complex,process,regulatory,compliance,adaptability
+medium|What is the difference between perception and action in agentic systems?|perception,action,decide,act,perceive,autonomous,component,independently,system
+
+# HARD (5 questions) — Requires deep understanding and synthesis
+hard|How do agentic AI systems achieve autonomous decision-making across perceive-decide-act cycles?|autonomous,decision-making,perceive,decide,act,cycle,intelligent,system,independent,framework
+hard|What are the strategic implications of adopting agentic AI for enterprise operations?|strategic,implication,adoption,enterprise,operation,transformation,business,innovation,competitive
+hard|How does the collaboration between Konverge AI and Emergence AI enhance this guide's value?|collaboration,Konverge,Emergence,expertise,perspective,merge,practical,autonomous,orchestration
+hard|What frameworks enable organizations to excel in implementing agentic AI?|framework,organization,excel,implementation,guidance,practical,leverage,navigate,dynamic
+hard|How do agentic AI systems address efficiency and precision in operations and innovations?|efficiency,precision,operation,innovation,drive,system,capability,autonomous,greater,intelligent
