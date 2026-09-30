@@ -571,12 +571,10 @@ Returns system status and current configuration.
 
 1. **Chunk size 1000 / overlap 150** — balances enough context per chunk for coherent answers vs. enough granularity to not dilute relevance scoring.
 
-2. **RRF over weighted linear combination** — RRF is parameter-free (just the constant k=60) and rank-based, so it doesn't need the dense and sparse scores to be on the same scale. Simpler and more robust.
+2. **Retry with wider top-k** — instead of rewriting the query, we double the candidate pool on retry. This catches edge cases where relevant chunks ranked 11-20 in the first pass.
 
-3. **Retry with wider top-k** — instead of rewriting the query, we double the candidate pool on retry. This catches edge cases where relevant chunks ranked 11-20 in the first pass.
+3. **BM25 index in memory** — the tokenized corpus (~200KB JSONL) loads once at startup and stays in RAM. No disk I/O per query.
 
-4. **BM25 index in memory** — the tokenized corpus (~200KB JSONL) loads once at startup and stays in RAM. No disk I/O per query.
+4. **Separate embedding task types** — ingestion uses `RETRIEVAL_DOCUMENT`, queries use `RETRIEVAL_QUERY` (as recommended by Gemini docs for asymmetric search).
 
-5. **Separate embedding task types** — ingestion uses `RETRIEVAL_DOCUMENT`, queries use `RETRIEVAL_QUERY` (as recommended by Gemini docs for asymmetric search).
-
-6. **MemorySaver checkpointer** — each `thread_id` gets its own conversation state, enabling multi-turn interactions without additional infrastructure.
+5. **MemorySaver checkpointer** — each `thread_id` gets its own conversation state, enabling multi-turn interactions without additional infrastructure.
