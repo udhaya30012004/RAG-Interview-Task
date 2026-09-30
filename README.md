@@ -352,7 +352,26 @@ Below are sample queries run through the system, showing the generated answer, s
 
 ### Query 4: "How can organizations assess their readiness for agentic AI adoption?"
 
-**Answer (summarized):** The ebook outlines a readiness framework covering data infrastructure maturity, talent and skill availability, existing AI/ML capabilities, organizational culture toward automation, governance and compliance readiness, and executive sponsorship. Organizations should evaluate these dimensions before embarking on an agentic AI adoption journey.
+![Query 4 — Organizational Readiness](screenshots/4th%20query%20result%20.png)
+
+**Answer:**
+Organizations can assess their readiness for Agentic AI by following the framework and checkpoints outlined in the ebook:
+
+1. **Use the comprehensive readiness framework**
+   - Evaluate the key prerequisites: data, infrastructure, talent, ethics, and industry-specific factors.
+   - Apply the structured decision tree that starts with a data-readiness assessment and then branches into infrastructure, talent, and ethical considerations.
+
+2. **Check the industry-specific readiness analysis**
+   - Examine the four readiness stages and compare your organization's current state against them.
+   - Assess factors such as data maturity, tech infrastructure, talent availability, regulatory adaptability, and ethical frameworks.
+
+3. **Conduct a maturity assessment**
+   - Identify strengths and gaps in the foundational elements: data readiness, technological infrastructure, organizational alignment, skilled workforce, and cultural/ethical preparedness.
+
+4. **Use the checklist of evaluation parameters**
+   - Confirm that each parameter is in place before moving forward, ensuring you have the right foundational elements for Agentic AI adoption.
+
+By systematically applying these steps, an organization can determine whether it is ready to adopt Agentic AI or if further preparation is needed.
 
 | Source Chunk | Page no | Label | RRF Score |
 |---|---|---|---|
@@ -368,7 +387,15 @@ Below are sample queries run through the system, showing the generated answer, s
 
 ### Query 5: "What are the key orchestration challenges for agentic AI?"
 
-**Answer (summarized):** Key challenges include coordinating multiple autonomous agents with their own goals, managing complex inter-agent communication, handling real-time task allocation and conflict resolution, integrating with legacy enterprise systems, and ensuring governance/compliance across distributed agent workflows.
+![Query 5 — Orchestration Challenges](screenshots/5th%20query%20results.png)
+
+**Answer:**
+Key orchestration challenges for agentic AI:
+
+1. **Communication & Coordination** — Ensuring seamless, interoperable interaction among agents that may use different technologies or standards, and establishing a uniform protocol for their exchanges.  
+2. **Conflict Management** — Resolving conflicts that arise from overlapping objectives, resource competition, or differing priorities without human intervention.  
+3. **Scalability** — Supporting large‑scale systems with hundreds or thousands of agents, requiring robust infrastructure, efficient resource‑allocation algorithms, and the ability to add or remove agents without disrupting performance.  
+4. **Reliability & Fault Tolerance** — Maintaining overall system functionality when individual agents fail, necessitating advanced fault‑tolerance mechanisms so that a partial failure does not jeopardize the entire orchestration.
 
 | Source Chunk | Page no | Label | RRF Score |
 |---|---|---|---|
@@ -434,9 +461,9 @@ Key take‑aways:
 
 ### Overall Analysis
 
-The evaluation shows that **hybrid retrieval consistently outperforms** using either dense or sparse methods alone.  For the most difficult (hard) questions the system always returns a relevant chunk first (MRR = 1.0).  The modest overlap (≈15 %) between dense and sparse top‑5 results confirms that each method contributes unique information, which is why the fusion step improves both precision and recall.  In practice this means the RAG pipeline is robust: even when one retrieval mode misses a term, the other can compensate, giving users more reliable answers.
+Hybrid retrieval outperforms dense‑only or sparse‑only approaches. For hard queries the top result is always relevant (MRR = 1.0). Dense and sparse top‑5 results overlap by only ~15 %, so each contributes unique chunks; the RRF fusion step raises both precision and recall.
 
-In simpler terms, the system works like a team where one member (dense search) understands the *meaning* of the query, while the other (sparse search) spots the *exact words*.  Their combined scores are then re‑ranked so the best‑matched pieces rise to the top, leading to higher quality answers across all difficulty levels.
+In plain language: dense search captures meaning, sparse search catches exact terms, and the fusion re‑ranks to surface the best matches, delivering more reliable answers.
 
 ---
 
@@ -465,6 +492,18 @@ Each response includes the generated answer, a "Hybrid Retrieval Verified" badge
 A more complex query about AI Agent architecture — the system pulls from multiple pages and synthesizes a layered explanation.
 
 ![Architecture Query](screenshots/architecture_qwery.png)
+
+### Organizational Readiness Query
+
+Answering a multi-faceted assessment query on Agentic AI adoption using fused dense and sparse retrieval.
+
+![Organizational Readiness Query](screenshots/4th%20query%20result%20.png)
+
+### Key Orchestration Challenges Query
+
+Synthesizing multi-agent coordination, conflict management, scalability, and fault tolerance challenges.
+
+![Key Orchestration Challenges Query](screenshots/5th%20query%20results.png)
 
 ### Out-of-Scope Handling
 
